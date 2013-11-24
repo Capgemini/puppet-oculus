@@ -1,0 +1,23 @@
+results_explain: 0
+elasticsearch:
+  servers:
+<%- @elasticsearch_servers.each do |server| -%>
+  - "<%= server %>"
+<% end %>
+  index: "metrics"
+  timeout: 30
+  phrase_slop: 20
+  scorers:
+    dtw:
+      radius: 5
+      scale_points: 25
+    euclidian:
+      scale_points: 25
+skyline:
+  host: "<%= @skyline_host %>"
+  port: <%= @skyline_port %>
+  listener_port: <%= @skyline_listener_port %>
+  metric_prefix: "mini"
+redis:
+  host: "<%= @redis_host %>"
+  port: <%= @redis_port %>
